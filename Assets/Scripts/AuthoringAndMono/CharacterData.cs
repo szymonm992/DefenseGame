@@ -16,6 +16,9 @@ namespace DefenseGame
             {
                 movementSpeed = authoring.movementSpeed
             });
+            AddComponent(entity, new InputsData
+            {
+            });
         }
     }
 }
