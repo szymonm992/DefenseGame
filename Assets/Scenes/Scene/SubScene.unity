@@ -160,7 +160,7 @@ MonoBehaviour:
   m_SolverIterationCount: 4
   m_EnableSolverStabilizationHeuristic: 0
   m_MultiThreaded: 1
-  m_SynchronizeCollisionWorld: 1
+  m_SynchronizeCollisionWorld: 0
 --- !u!4 &79014940
 Transform:
   m_ObjectHideFlags: 0
@@ -313,7 +313,7 @@ Transform:
   - {fileID: 921449362}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1001 &3147367886438693345
+--- !u!1001 &1578574862
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -456,4 +456,4 @@ SceneRoots:
   - {fileID: 1530539468}
   - {fileID: 5439749545712854715}
   - {fileID: 79014940}
-  - {fileID: 3147367886438693345}
+  - {fileID: 1578574862}

@@ -6,6 +6,7 @@ namespace DefenseGame
     public class Shell : MonoBehaviour
     {
         public float movementSpeed = 10f;
+        public float damage = 1f;
     }
 
     public class ShellBaker : Baker<Shell>
@@ -16,6 +17,10 @@ namespace DefenseGame
             AddComponent(entity, new StraightMovementData
             {
                 movementSpeed = authoring.movementSpeed,
+            });
+            AddComponent(entity, new ShellData
+            {
+                damage = authoring.damage,
             });
         }
     }
