@@ -5,6 +5,7 @@ namespace DefenseGame
     public struct CharacterData : IComponentData
     {
         public float movementSpeed;
+        public float hp;
     }
 
     public class CharacterBaker : Baker<Character>
@@ -15,6 +16,7 @@ namespace DefenseGame
             AddComponent(entity, new CharacterData
             {
                 movementSpeed = authoring.movementSpeed,
+                hp = authoring.hp,
             });
             AddComponent(entity, new InputsData());
         }
