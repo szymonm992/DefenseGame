@@ -1,5 +1,5 @@
 {
-    "name": "InputSettings",
+    "name": "Inputs",
     "maps": [
         {
             "name": "Player",
@@ -10,6 +10,24 @@
                     "type": "Value",
                     "id": "342a477b-f45a-448c-9f78-5da1b841130d",
                     "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "Shoot",
+                    "type": "Button",
+                    "id": "8ad52b7c-a530-4bd4-a9bb-73a734284bef",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "AreaShoot",
+                    "type": "Button",
+                    "id": "80fede71-9d8d-4447-94eb-db67d1653f8e",
+                    "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
@@ -81,6 +99,28 @@
                     "action": "Move",
                     "isComposite": false,
                     "isPartOfComposite": true
+                },
+                {
+                    "name": "",
+                    "id": "7bbb0edb-debe-412c-b2b2-eb1a27875724",
+                    "path": "<Keyboard>/space",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Shoot",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "62f8f272-b1aa-4a2e-a4a6-ba486aa01c5d",
+                    "path": "<Keyboard>/y",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "AreaShoot",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
         }

@@ -14,11 +14,9 @@ namespace DefenseGame
             var entity = GetEntity(TransformUsageFlags.Dynamic);
             AddComponent(entity, new CharacterData
             {
-                movementSpeed = authoring.movementSpeed
+                movementSpeed = authoring.movementSpeed,
             });
-            AddComponent(entity, new InputsData
-            {
-            });
+            AddComponent(entity, new InputsData());
         }
     }
 }
