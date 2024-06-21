@@ -1,8 +1,6 @@
 using Unity.Entities;
 using Unity.Transforms;
 using Unity.Mathematics;
-using UnityEngine;
-using Unity.Rendering;
 
 namespace DefenseGame
 {
@@ -17,13 +15,11 @@ namespace DefenseGame
 
                 foreach (var (inputs, shooter) in SystemAPI.Query<RefRO<InputsData>, RefRW<ShooterData>>())
                 {
-                    if (inputs.ValueRO.isShooting && (time - shooter.ValueRW.lastShotTime) >= shooter.ValueRW.shotCooldown)
+                    if (inputs.ValueRO.isShooting && (time - shooter.ValueRW.lastShotTime) >= shooter.ValueRO.shotCooldown)
                     {
                         shooter.ValueRW.lastShotTime = (float)time;
                         var shellEntity = ecb.Instantiate(shooter.ValueRO.shellPrefab);
-
-                        // Get the LocalToWorld transform to obtain the world space position
-                        var shootingSpotTransform = state.EntityManager.GetComponentData<LocalToWorld>(shooter.ValueRW.shootingSpotEntity);
+                        var shootingSpotTransform = state.EntityManager.GetComponentData<LocalToWorld>(shooter.ValueRO.shootingSpotEntity);
 
                         ecb.SetComponent(shellEntity, new LocalTransform
                         {
