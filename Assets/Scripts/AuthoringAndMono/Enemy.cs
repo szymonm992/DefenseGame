@@ -3,16 +3,21 @@ using UnityEngine;
 
 namespace DefenseGame
 {
-    public class Shell : MonoBehaviour
+    public class Enemy : MonoBehaviour
     {
-        public float movementSpeed = 10f;
+        public float hp;
+        public float movementSpeed = 2f;
     }
 
-    public class ShellBaker : Baker<Shell>
+    public class EnemyBaker : Baker<Enemy>
     {
-        public override void Bake(Shell authoring)
+        public override void Bake(Enemy authoring)
         {
             var entity = GetEntity(TransformUsageFlags.Dynamic);
+            AddComponent(entity, new EnemyData
+            {
+                hp = authoring.hp   
+            });
             AddComponent(entity, new StraightMovementData
             {
                 movementSpeed = authoring.movementSpeed,
