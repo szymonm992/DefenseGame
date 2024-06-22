@@ -79,7 +79,6 @@ namespace DefenseGame
             {
                 if (entityManager.HasComponent<GameOverTag>(playerEntity))
                 {
-                    Debug.Log("Game over!!!");
                     var gameOverTag = entityManager.GetComponentData<GameOverTag>(playerEntity);
                     ToggleGameOverScreen(true, gameOverTag.experienceGained, gameOverTag.levelReached);
                 }
