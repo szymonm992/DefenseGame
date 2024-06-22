@@ -5,8 +5,11 @@ namespace DefenseGame
 {
     public class Shell : MonoBehaviour
     {
-        public float movementSpeed = 10f;
-        public float damage = 1f;
+        public float MovementSpeed => movementSpeed;
+        public float Damage => damage;
+
+        [SerializeField] private float movementSpeed = 10f;
+        [SerializeField] private float damage = 1f;
     }
 
     public class ShellBaker : Baker<Shell>
@@ -16,11 +19,11 @@ namespace DefenseGame
             var entity = GetEntity(TransformUsageFlags.Dynamic);
             AddComponent(entity, new StraightMovementData
             {
-                movementSpeed = authoring.movementSpeed,
+                movementSpeed = authoring.MovementSpeed,
             });
             AddComponent(entity, new ShellData
             {
-                damage = authoring.damage,
+                damage = authoring.Damage,
             });
         }
     }

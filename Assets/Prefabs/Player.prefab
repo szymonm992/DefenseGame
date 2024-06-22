@@ -206,8 +206,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4235824513009170799}
-  - component: {fileID: 4141894347918180277}
   - component: {fileID: 7157364969495697048}
+  - component: {fileID: 5192850853175142417}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -233,20 +233,6 @@ Transform:
   - {fileID: 8110989039586110018}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &4141894347918180277
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7701987820334465413}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1814232138e24994ba2ba72fb0976d36, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  movementSpeed: 16
-  hp: 10
 --- !u!114 &7157364969495697048
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -263,3 +249,19 @@ MonoBehaviour:
   shellPrefab: {fileID: 6810334009802395172, guid: 742c71123eb8f8545a5304fbe5a46a5c,
     type: 3}
   shootingSpot: {fileID: 6349405772602017636}
+--- !u!114 &5192850853175142417
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7701987820334465413}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 628df12b1fc364d4ab4de554c33a44f5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hp: 10
+  movementSpeed: 16
+  experience: 0
+  level: 1

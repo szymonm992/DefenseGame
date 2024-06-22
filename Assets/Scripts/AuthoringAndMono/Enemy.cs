@@ -3,10 +3,11 @@ using UnityEngine;
 
 namespace DefenseGame
 {
-    public class Enemy : MonoBehaviour
+    public class Enemy : Unit
     {
-        public float hp;
-        public float movementSpeed = 2f;
+        public float ExperienceForKill => experienceForKill;
+
+        [SerializeField] private float experienceForKill = 5f;
     }
 
     public class EnemyBaker : Baker<Enemy>
@@ -16,11 +17,13 @@ namespace DefenseGame
             var entity = GetEntity(TransformUsageFlags.Dynamic);
             AddComponent(entity, new EnemyData
             {
-                hp = authoring.hp   
+                hp = authoring.MaxHp,
+                experienceForKill = authoring.ExperienceForKill,
+
             });
             AddComponent(entity, new StraightMovementData
             {
-                movementSpeed = authoring.movementSpeed,
+                movementSpeed = authoring.MovementSpeed,
             });
         }
     }

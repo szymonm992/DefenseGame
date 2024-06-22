@@ -11,7 +11,7 @@ namespace DefenseGame
     {
         public void OnUpdate(ref SystemState state)
         {
-            foreach (var (data, inputs, transform) in SystemAPI.Query<RefRO<CharacterData>, RefRO<InputsData>, RefRW<LocalTransform>>())
+            foreach (var (data, inputs, transform) in SystemAPI.Query<RefRO<PlayerData>, RefRO<InputsData>, RefRW<LocalTransform>>())
             { 
                 float3 offsetPosition = transform.ValueRO.Position;
                 offsetPosition.x += inputs.ValueRO.movement.x * data.ValueRO.movementSpeed * SystemAPI.Time.DeltaTime;
