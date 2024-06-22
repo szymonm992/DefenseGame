@@ -9,35 +9,39 @@ namespace DefenseGame
     {
         public void OnUpdate(ref SystemState state)
         {
+            if (SystemAPI.TryGetSingletonEntity<GameOverTag>(out _))
             {
-                var time = SystemAPI.Time.ElapsedTime;
-                var ecb = new EntityCommandBuffer(Unity.Collections.Allocator.Temp);
-
-                foreach (var (inputs, shooter) in SystemAPI.Query<RefRO<InputsData>, RefRW<ShooterData>>())
-                {
-                    if (inputs.ValueRO.isShooting && (time - shooter.ValueRW.lastShotTime) >= shooter.ValueRO.shotCooldown)
-                    {
-                        shooter.ValueRW.lastShotTime = (float)time;
-                        var shellEntity = ecb.Instantiate(shooter.ValueRO.shellPrefab);
-                        var shootingSpotTransform = state.EntityManager.GetComponentData<LocalToWorld>(shooter.ValueRO.shootingSpotEntity);
-
-                        ecb.SetComponent(shellEntity, new LocalTransform
-                        {
-                            Position = shootingSpotTransform.Position,
-                            Rotation = quaternion.identity,
-                            Scale = 1f
-                        });
-
-                        ecb.AddComponent(shellEntity, new ShellTag
-                        {
-                            damage = shooter.ValueRO.shotDamage
-                        });
-                    }
-                }
-
-                ecb.Playback(state.EntityManager);
-                ecb.Dispose();
+                return;
             }
+
+            var time = SystemAPI.Time.ElapsedTime;
+            var ecb = new EntityCommandBuffer(Unity.Collections.Allocator.Temp);
+
+            foreach (var (inputs, shooter) in SystemAPI.Query<RefRO<InputsData>, RefRW<ShooterData>>())
+            {
+                if (inputs.ValueRO.isShooting && (time - shooter.ValueRW.lastShotTime) >= shooter.ValueRO.shotCooldown)
+                {
+                    shooter.ValueRW.lastShotTime = (float)time;
+                    var shellEntity = ecb.Instantiate(shooter.ValueRO.shellPrefab);
+                    var shootingSpotTransform = state.EntityManager.GetComponentData<LocalToWorld>(shooter.ValueRO.shootingSpotEntity);
+
+                    ecb.SetComponent(shellEntity, new LocalTransform
+                    {
+                        Position = shootingSpotTransform.Position,
+                        Rotation = quaternion.identity,
+                        Scale = 1f
+                    });
+
+                    ecb.AddComponent(shellEntity, new ShellTag
+                    {
+                        damage = shooter.ValueRO.shotDamage
+                    });
+                }
+            }
+
+            ecb.Playback(state.EntityManager);
+            ecb.Dispose();
+
         }
     }
 }

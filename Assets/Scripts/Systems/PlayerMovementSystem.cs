@@ -1,8 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
 using Unity.Entities;
 using Unity.Transforms;
-using UnityEngine;
 using Unity.Mathematics;
 
 namespace DefenseGame
@@ -11,6 +8,11 @@ namespace DefenseGame
     {
         public void OnUpdate(ref SystemState state)
         {
+            if (SystemAPI.TryGetSingletonEntity<GameOverTag>(out _))
+            {
+                return;
+            }
+
             foreach (var (data, inputs, transform) in SystemAPI.Query<RefRO<PlayerData>, RefRO<InputsData>, RefRW<LocalTransform>>())
             { 
                 float3 offsetPosition = transform.ValueRO.Position;

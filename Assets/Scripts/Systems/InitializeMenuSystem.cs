@@ -11,7 +11,6 @@ namespace DefenseGame
             state.RequireForUpdate<PlayerData>();
         }
 
-        [BurstCompile]
         public void OnStartRunning(ref SystemState state)
         {
             if (Menu.Instance == null)

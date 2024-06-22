@@ -8,6 +8,11 @@ namespace DefenseGame
     {
         public void OnUpdate(ref SystemState state)
         {
+            if (SystemAPI.TryGetSingletonEntity<GameOverTag>(out _))
+            {
+                return;
+            }
+
             foreach (var (data, transform) in SystemAPI.Query<RefRO<StraightMovementData>, RefRW<LocalTransform>>())
             {
                 float3 forward = math.forward(transform.ValueRO.Rotation);
