@@ -2,7 +2,7 @@ using Unity.Entities;
 
 namespace DefenseGame
 {
-    public struct ShellData : IComponentData
+    public struct ShellTag : IComponentData
     {
         public float damage;
     }

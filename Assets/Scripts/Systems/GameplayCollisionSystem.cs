@@ -1,5 +1,3 @@
-using System;
-using System.Linq;
 using Unity.Burst;
 using Unity.Collections;
 using Unity.Entities;
@@ -10,7 +8,7 @@ namespace DefenseGame
 {
     [UpdateInGroup(typeof(FixedStepSimulationSystemGroup))]
     [UpdateAfter(typeof(PhysicsSystemGroup))]
-    public partial struct ShellCollisionSystem : ISystem, ISystemStartStop
+    public partial struct GameplayCollisionSystem : ISystem, ISystemStartStop
     {
         private Entity playerEntity;
 
@@ -31,15 +29,17 @@ namespace DefenseGame
         public void OnUpdate(ref SystemState state)
         {
             var ecb = new EntityCommandBuffer(Allocator.TempJob);
-            var shellTagHandle = SystemAPI.GetComponentLookup<ShellData>(true);
+            var shellTagHandle = SystemAPI.GetComponentLookup<ShellTag>(true);
+            var wallTagHandle = SystemAPI.GetComponentLookup<WallTag>(true);
             var enemyTagHandle = SystemAPI.GetComponentLookup<EnemyData>(false);
             var playerTagHandle = SystemAPI.GetComponentLookup<PlayerData>(false);
             
-            var collisionJob = new ShellCollisionEventJob
+            var collisionJob = new GameplayCollisionEventJob
             {
                 shellTagLookup = shellTagHandle,
                 enemyTagLookup = enemyTagHandle,
                 playerTagLookup = playerTagHandle,
+                wallTagLookup = wallTagHandle,
                 playerEntity = playerEntity,
                 ecb = ecb.AsParallelWriter()
             };
@@ -56,10 +56,11 @@ namespace DefenseGame
         }
 
         [BurstCompile]
-        struct ShellCollisionEventJob : ICollisionEventsJob
+        struct GameplayCollisionEventJob : ICollisionEventsJob
         {
-            [ReadOnly] public ComponentLookup<ShellData> shellTagLookup;
+            [ReadOnly] public ComponentLookup<ShellTag> shellTagLookup;
             [ReadOnly] public Entity playerEntity;
+            [ReadOnly] public ComponentLookup<WallTag> wallTagLookup;
             public ComponentLookup<EnemyData> enemyTagLookup;
             public ComponentLookup<PlayerData> playerTagLookup;
             public EntityCommandBuffer.ParallelWriter ecb;
@@ -73,15 +74,17 @@ namespace DefenseGame
                 bool isSecondEntityShell = shellTagLookup.HasComponent(secondEntity);
                 bool isFirstEntityEnemy = enemyTagLookup.HasComponent(firstEntity);
                 bool isSecondEntityEnemy = enemyTagLookup.HasComponent(secondEntity);
-               
+                bool isFirstEntityWall = wallTagLookup.HasComponent(firstEntity);
+                bool isSecondEntityWall = wallTagLookup.HasComponent(secondEntity);
+
+                var playerData = playerTagLookup[playerEntity];
+                var enemyEntity = isFirstEntityEnemy ? firstEntity : secondEntity;
+
                 if ((isFirstEntityShell && isSecondEntityEnemy) || (isSecondEntityShell && isFirstEntityEnemy))
                 {
                     var shellEntity = isFirstEntityShell ? firstEntity : secondEntity;
-                    var enemyEntity = isFirstEntityEnemy ? firstEntity : secondEntity;
-
                     var shellData = shellTagLookup[shellEntity];
                     var enemyData = enemyTagLookup[enemyEntity];
-                    var playerData = playerTagLookup[playerEntity];
 
                     if ((enemyData.hp - shellData.damage) > 0)
                     {
@@ -96,6 +99,12 @@ namespace DefenseGame
                     }
 
                     ecb.DestroyEntity(0, shellEntity);
+                }
+                else if ((isFirstEntityWall && isSecondEntityEnemy) || (isSecondEntityWall && isFirstEntityEnemy))
+                {
+                    playerData.hp -= 1;
+                    playerTagLookup[playerEntity] = playerData;
+                    ecb.DestroyEntity(0, enemyEntity);
                 }
             }
         }

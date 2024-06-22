@@ -6,10 +6,8 @@ namespace DefenseGame
     public class Shell : MonoBehaviour
     {
         public float MovementSpeed => movementSpeed;
-        public float Damage => damage;
 
         [SerializeField] private float movementSpeed = 10f;
-        [SerializeField] private float damage = 1f;
     }
 
     public class ShellBaker : Baker<Shell>
@@ -21,10 +19,7 @@ namespace DefenseGame
             {
                 movementSpeed = authoring.MovementSpeed,
             });
-            AddComponent(entity, new ShellData
-            {
-                damage = authoring.Damage,
-            });
+            AddComponent(entity, new ShellTag());
         }
     }
 }
