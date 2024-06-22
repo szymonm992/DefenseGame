@@ -9,5 +9,6 @@ namespace DefenseGame
         public Entity shootingSpotEntity;
         public float shotCooldown;
         public float lastShotTime;
+        public float shotDamage;
     }
 }

@@ -27,6 +27,11 @@ namespace DefenseGame
                             Rotation = quaternion.identity,
                             Scale = 1f
                         });
+
+                        ecb.AddComponent(shellEntity, new ShellTag
+                        {
+                            damage = shooter.ValueRO.shotDamage
+                        });
                     }
                 }
 

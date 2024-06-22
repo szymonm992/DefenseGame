@@ -19,7 +19,6 @@ namespace DefenseGame
             {
                 movementSpeed = authoring.MovementSpeed,
             });
-            AddComponent(entity, new ShellTag());
         }
     }
 }

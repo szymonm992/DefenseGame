@@ -191,7 +191,7 @@ Transform:
   m_GameObject: {fileID: 5359297941971757710}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.79, z: 3.52}
+  m_LocalPosition: {x: 0, y: 0.79, z: 3.81}
   m_LocalScale: {x: 0.8, y: 0.8, z: 3}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -246,6 +246,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   shotCooldown: 0.2
+  shotDamage: 1
   shellPrefab: {fileID: 6810334009802395172, guid: 742c71123eb8f8545a5304fbe5a46a5c,
     type: 3}
   shootingSpot: {fileID: 6349405772602017636}
@@ -261,7 +262,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 628df12b1fc364d4ab4de554c33a44f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hp: 10
+  maxHp: 1
   movementSpeed: 16
   experience: 0
   level: 1

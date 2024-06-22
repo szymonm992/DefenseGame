@@ -102,9 +102,22 @@ namespace DefenseGame
                 }
                 else if ((isFirstEntityWall && isSecondEntityEnemy) || (isSecondEntityWall && isFirstEntityEnemy))
                 {
-                    playerData.hp -= 1;
+                    if ((playerData.hp - 1) > 0)
+                    {
+                        playerData.hp -= 1;
+                        ecb.DestroyEntity(0, enemyEntity);
+                    }
+                    else
+                    {
+                        playerData.hp = 0;
+                        ecb.AddComponent(0, playerEntity, new GameOverTag
+                        {
+                            experienceGained = playerData.experience,
+                            levelReached = playerData.level,
+                        });
+                    }
+
                     playerTagLookup[playerEntity] = playerData;
-                    ecb.DestroyEntity(0, enemyEntity);
                 }
             }
         }

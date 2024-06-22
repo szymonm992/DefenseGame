@@ -6,6 +6,7 @@ namespace DefenseGame
     public class Shooter : MonoBehaviour
     {
         public float shotCooldown = 0.2f;
+        public float shotDamage = 1f;
         public GameObject shellPrefab;
         public Transform shootingSpot;
     }
@@ -22,6 +23,7 @@ namespace DefenseGame
                 shellPrefab = GetEntity(authoring.shellPrefab, TransformUsageFlags.Dynamic),
                 shootingSpotEntity = shootingSpotEntity,
                 shotCooldown = authoring.shotCooldown,
+                shotDamage = authoring.shotDamage,
                 lastShotTime = 0f
             });
         }
