@@ -31,16 +31,14 @@ namespace DefenseGame
                 return;
             }
 
-            var deltaTime = SystemAPI.Time.DeltaTime;
+            var time = SystemAPI.Time.ElapsedTime;
             var ecb = new EntityCommandBuffer(Allocator.Temp);
 
             foreach (var (spawnConfig, enemyPrefabsBuffer) in SystemAPI.Query<RefRW<EnemySpawnSettings>, DynamicBuffer<EnemyPrefabEntry>>())
             {
-                spawnConfig.ValueRW.timeSinceLastSpawn += deltaTime;
-
-                if (spawnConfig.ValueRW.timeSinceLastSpawn >= spawnConfig.ValueRO.spawnInterval)
+                if ((time - spawnConfig.ValueRW.lastSpawnTime) >= spawnConfig.ValueRO.spawnInterval)
                 {
-                    spawnConfig.ValueRW.timeSinceLastSpawn = 0;
+                    spawnConfig.ValueRW.lastSpawnTime = (float)time;
 
                     float3 spawnPosition = new float3(
                         random.NextFloat(spawnConfig.ValueRO.mapOffset.x, spawnConfig.ValueRO.mapOffset.x + spawnConfig.ValueRO.mapDimensions.x),

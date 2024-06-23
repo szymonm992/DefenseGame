@@ -34,7 +34,7 @@ namespace DefenseGame
                     spawnInterval = authoring.spawnInterval,
                     mapDimensions = authoring.mapDimensions,
                     mapOffset = authoring.mapOffset,
-                    timeSinceLastSpawn = 0,
+                    lastSpawnTime = 0,
                 });
             }
         }
