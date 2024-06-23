@@ -39,7 +39,7 @@ namespace DefenseGame
 
             initialized = true;
             entities.Dispose();
-            Debug.Log("Initialized HUD Controller");
+            Debug.Log($"Initialized {nameof(Menu)} component successfully!");
         }
 
         public void RestartGame()
