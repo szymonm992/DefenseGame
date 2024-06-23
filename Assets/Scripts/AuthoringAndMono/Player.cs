@@ -20,6 +20,7 @@ namespace DefenseGame
             AddComponent(entity, new PlayerData
             {
                 movementSpeed = authoring.MovementSpeed,
+                maxHp = authoring.MaxHp,
                 hp = authoring.MaxHp,
                 experience = authoring.Experience,
                 level = authoring.Level,

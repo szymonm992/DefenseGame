@@ -17,6 +17,7 @@ namespace DefenseGame
             var entity = GetEntity(TransformUsageFlags.Dynamic);
             AddComponent(entity, new EnemyData
             {
+                maxHp = authoring.MaxHp,
                 hp = authoring.MaxHp,
                 experienceForKill = authoring.ExperienceForKill,
 

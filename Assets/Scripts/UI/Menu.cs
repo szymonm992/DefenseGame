@@ -10,7 +10,9 @@ namespace DefenseGame
     {
         public static Menu Instance;
 
-        [SerializeField] private TextMeshProUGUI gameOverSummarySubtitle;
+        [SerializeField] private TextMeshProUGUI gameOverSummarySubtitleText;
+        [SerializeField] private TextMeshProUGUI experienceText;
+        [SerializeField] private TextMeshProUGUI healthPointsText;
         [SerializeField] private CanvasGroup gameOverGroup;
 
         private bool initialized = false;
@@ -61,7 +63,7 @@ namespace DefenseGame
         {
             isGameOverDisplayed = value;
             float desiredAlphaValue = value ? 1f : 0f;
-            gameOverSummarySubtitle.text = $"You've scored {experienceGained} experience and reached {levelReached} level";
+            gameOverSummarySubtitleText.text = $"You've scored {experienceGained} experience and reached {levelReached} level";
             gameOverGroup.alpha = desiredAlphaValue;
         }
 
@@ -77,6 +79,10 @@ namespace DefenseGame
         {
             if (initialized && !isGameOverDisplayed)
             {
+                var playerData = entityManager.GetComponentData<PlayerData>(playerEntity);
+                experienceText.text = $"Current exp: {playerData.experience}";
+                healthPointsText.text = $"Current HP: {playerData.hp}/{playerData.maxHp}";
+
                 if (entityManager.HasComponent<GameOverTag>(playerEntity))
                 {
                     var gameOverTag = entityManager.GetComponentData<GameOverTag>(playerEntity);
