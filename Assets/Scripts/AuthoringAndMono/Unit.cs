@@ -12,5 +12,18 @@ namespace DefenseGame
         [SerializeField] private float maxHp = 10f;
         [SerializeField] private float movementSpeed = 2f;
         [SerializeField] private PresentationalGameObject presentationModel;
+
+        public abstract class UnitBaker<T> : Baker<T> where T : Unit
+        {
+            public override void Bake(T authoring)
+            {
+                var entity = GetEntity(TransformUsageFlags.Dynamic);
+
+                AddComponentObject(entity, new UnreadyPresentationGameObject
+                {
+                    Prefab = authoring.PresentationModel
+                });
+            }
+        }
     }
 }

@@ -1,5 +1,6 @@
 using Unity.Entities;
 using UnityEngine;
+using static DefenseGame.Unit;
 
 namespace DefenseGame
 {
@@ -10,10 +11,12 @@ namespace DefenseGame
         [SerializeField] private float experienceForKill = 5f;
     }
 
-    public class EnemyBaker : Baker<Enemy>
+    public class EnemyBaker : UnitBaker<Enemy>
     {
         public override void Bake(Enemy authoring)
         {
+            base.Bake(authoring);
+
             var entity = GetEntity(TransformUsageFlags.Dynamic);
 
             AddComponent(entity, new EnemyData
@@ -26,10 +29,7 @@ namespace DefenseGame
             {
                 movementSpeed = authoring.MovementSpeed,
             });
-            AddComponentObject(entity, new UnreadyPresentationGameObject
-            {
-                Prefab = authoring.PresentationModel
-            });
         }
     }
 }
+
