@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 4143015844048617720}
   - component: {fileID: 586370089096276400}
   m_Layer: 0
-  m_Name: EnemyCube
+  m_Name: EnemyCubeEntity
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -101,6 +101,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHp: 5
   movementSpeed: 5
+  presentationModel: {fileID: 4124622427580810600, guid: a3d68962d910d534c84304988c7b3f5f,
+    type: 3}
   experienceForKill: 3
 --- !u!114 &6252802583537115482
 MonoBehaviour:
@@ -252,7 +254,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5727646053084871742}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
